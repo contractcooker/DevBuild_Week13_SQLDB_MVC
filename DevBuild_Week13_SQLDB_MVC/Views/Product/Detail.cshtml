@@ -1,0 +1,10 @@
+﻿
+@{
+    Product prod = (Product)ViewData["Product"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h2>@prod.Category</h2>
+<p>@prod.Description</p>
+<p>@prod.Price.ToString("C")</p>

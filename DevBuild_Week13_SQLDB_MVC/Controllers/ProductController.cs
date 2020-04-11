@@ -13,20 +13,44 @@ namespace DevBuild_Week13_SQLDB_MVC.Controllers
     public class ProductController : Controller
     {
         IConfiguration ConfigRoot;
-        SqlConnection connection;
+        DAL dal;
 
         public ProductController(IConfiguration config)
         {
             ConfigRoot = config;
-            connection = new SqlConnection(ConfigRoot.GetConnectionString("coffeeDB"));
+            dal = new DAL(ConfigRoot.GetConnectionString("coffeeDB"));
         }
 
         public IActionResult Index()
         {
-            string queryString = "SELECT * FROM Products";
-            IEnumerable<Product> Products = connection.Query<Product>(queryString);
-            ViewData["Products"] = Products;
+            ViewData["Products"] = dal.GetProductCategories();
+
             return View("ProductIndex");
+        }
+
+        public IActionResult Category(string cat)
+        {
+            ViewData["Title"] = cat;
+            ViewData["Products"] = dal.GetProductsInCategory(cat);
+
+            return View();
+        }
+
+        public IActionResult Detail(int id)
+        {
+            Product prod = dal.GetProductById(id);
+            
+            if (prod == null)
+            {
+                return View("NoSuchItem");
+            }
+            else
+            {
+                ViewData["Title"] = prod.Name;
+                ViewData["Product"] = prod;
+
+                return View();
+            }
         }
     }
 }

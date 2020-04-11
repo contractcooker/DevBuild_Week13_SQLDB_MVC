@@ -1,14 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Product Index";
+    ViewData["Title"] = "Home Page";
     List<Product> Products = (List<Product>)ViewData["Products"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Coffee Shop Menu</h1>
+<div>
+    <h1 class="display-4">Menu:</h1>
+
     <ul>
         @foreach (Product p in Products)
         {
-            <li>@p.Name (@p.Category) @p.Description $@p.Price</li>
+            <li><a href="/Product/Category?cat=@p.Category">@p.Category</a></li>
         }
     </ul>
 

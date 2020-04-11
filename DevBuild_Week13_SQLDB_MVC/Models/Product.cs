@@ -3,24 +3,16 @@ namespace DevBuild_Week13_SQLDB_MVC.Models
 {
     public class Product
     {
-        /*
-            CREATE TABLE Products (
-              Id int NOT NULL PRIMARY KEY IDENTITY(1,1),
-              Name nvarchar(50) NOT NULL,
-              Price real NOT NULL,
-              Description nvarchar(280),
-              Category nvarchar(20) NOT NULL 
-              );   
-          */
+       
         private int id;
         private string name;
-        private double price;
+        private decimal price;
         private string description;
         private string category;
 
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
-        public double Price { get => price; set => price = value; }
+        public decimal Price { get => price; set => price = value; }
         public string Description { get => description; set => description = value; }
         public string Category { get => category; set => category = value; }
     }
